@@ -6,6 +6,11 @@ const errorHandler = require('./middleware/error');
 const routes = require('./routes');
 const pkg = require('./package.json');
 
+//para prender el server
+//sudo service mongod start 
+
+//parar server
+//sudo service mongod stop
 
 const { port, mongoUrl, secret } = config;
 const app = express();
