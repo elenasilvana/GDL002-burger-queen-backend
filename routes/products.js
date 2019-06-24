@@ -32,7 +32,7 @@ router.get('/:productId', (req, res)=> {
     });
 });
 
-//save product
+//create and save new product
 router.post('/',(req, res)=>{
     //creas un nuevo producto 
     //price y name son necesarios
@@ -56,6 +56,7 @@ router.post('/',(req, res)=>{
     product: String, //nombre de */
 });
 
+//modify product
 router.put('/:productId', (req, res)=>{
     //modifica el elemento
     //modificar el estatus
@@ -67,9 +68,21 @@ router.put('/:productId', (req, res)=>{
     }); 
 });
 
-router.delete('/:productid', (req, res)=>{
+//delete product
+router.delete('/:productId', (req, res)=>{
     //borrar el producto
-})
+    let productId = req.params.productId;
+    
+    Product.findById(productId, (err, product)=> {
+        if(err) res.send({message: `Error al borrar el producto ${err}`});
+
+        product.remove(err => {
+            if(err) res.send({message: `Error al borrar el producto: ${err}`});
+            res.send({message: `El producto ha sido eliminado`});
+        });
+    });
+
+});
 
 
 
