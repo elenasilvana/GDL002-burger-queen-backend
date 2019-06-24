@@ -10,13 +10,18 @@ router.use(function(req, res, next){
     next()
 });
 
+//all products
 router.get('/', (req, res) => {
-    //aquí deberían aparecer todos los productos
-    res.send('productooooos');
+    Product.find({}, (err, products)=>{
+        if(err) return res.send({message: `Error al realizar la petición ${err}`});
+        if (!products) return res.send({message: `no existen los productos`});
+
+        res.send({products});
+    });
  });
 
+//an especific product
 router.get('/:productId', (req, res)=> {
-    //aquí deberia aparecer el producto solicitado
     let productId = req.params.productId;
     
     Product.findById(productId, (err, product)=> {
@@ -27,6 +32,7 @@ router.get('/:productId', (req, res)=> {
     });
 });
 
+//save product
 router.post('/',(req, res)=>{
     //creas un nuevo producto 
     //price y name son necesarios
