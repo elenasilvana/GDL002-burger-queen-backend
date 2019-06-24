@@ -6,7 +6,7 @@ const Order = require('../models/Orders');
 router.use(function(req, res, next){
   console.log('gatitos bonitos')
   next()
-})
+});
 
 router.get('/', (req, res) => {
   //aquí deberían aparecer todas las ordenes
