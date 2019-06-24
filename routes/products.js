@@ -6,7 +6,7 @@ const router = express.Router();
 const Product = require('../models/Products');
 
 router.use(function(req, res, next){
-    console.log('aquí los productos')
+    console.log('/product entrando')
     next()
 });
 
@@ -15,8 +15,16 @@ router.get('/', (req, res) => {
     res.send('productooooos');
  });
 
-router.get('/:productid', (req, res)=> {
+router.get('/:productId', (req, res)=> {
     //aquí deberia aparecer el producto solicitado
+    let productId = req.params.productId;
+    
+    Product.findById(productId, (err, product)=> {
+        if(err) return res.send({message: `error al realizar la petición`}); 
+        if(!product) return res.send({message: `el producto no existe`});
+
+        res.send({product:product});
+    });
 });
 
 router.post('/',(req, res)=>{
@@ -32,7 +40,7 @@ router.post('/',(req, res)=>{
     product.save((err, productstored)=>{
         if(err) res.send('error al registrar producto');
 
-        res.send('producto registrado existosamente')
+        res.send({product});
     });
 
     /* 
