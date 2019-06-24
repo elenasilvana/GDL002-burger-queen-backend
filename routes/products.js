@@ -56,9 +56,15 @@ router.post('/',(req, res)=>{
     product: String, //nombre de */
 });
 
-router.put('/', (req, res)=>{
+router.put('/:productId', (req, res)=>{
     //modifica el elemento
-    //modificar el estatus 
+    //modificar el estatus
+    let productId = req.params.productId;
+    let update = req.body;
+    Product.findByIdAndUpdate(productId, update, {new: true}, (err, productUpdated)=>{
+        if(err) res.send({message: `Error al actualizar el producto ${err}`});
+        res.json({product: productUpdated})
+    }); 
 });
 
 router.delete('/:productid', (req, res)=>{
