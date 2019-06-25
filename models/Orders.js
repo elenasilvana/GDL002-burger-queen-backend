@@ -4,8 +4,9 @@ const Schema = mongoose.Schema;
 //declarates schema
 
 //y si voy a agregar un array como la orden? 
-const OrderSchema = new Schema({
-    clientName: String,
+const OrderSchema = Schema({
+    clientname: String,
+    status: {type: String, enum: ['pending', 'preparing', 'delivering', 'delivered']},
     order: Array
 });
 
