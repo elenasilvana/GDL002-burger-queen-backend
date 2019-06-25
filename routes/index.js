@@ -1,10 +1,16 @@
 const auth = require('./auth');
 const users = require('./users');
+//order
+//const order = require('./orders');
+//products
+//const products = require('./products');
+
 
 
 const root = (app, next) => {
   const pkg = app.get('pkg');
-  console.log(' aqui el pkg ', pkg);
+  //console.log(' aqui el pkg ', pkg); //regresa el json de la app
+  //esto es lo que se ve en el localhost
   app.get('/', (req, res) => res.json({ name: pkg.name, version: pkg.version }));
   app.all('*', (req, resp, next) => next(404));
   return next();
@@ -28,5 +34,5 @@ const register = (app, routes, cb) => {
 module.exports = (app, next) => register(app, [
   auth,
   users,
-  root,
+  root
 ], next);

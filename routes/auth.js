@@ -3,6 +3,7 @@ const User = require('../models/User');
 
 
 module.exports = (app, next) => {
+  
   const { secret } = app.get('config');
 
   /*
@@ -12,8 +13,10 @@ module.exports = (app, next) => {
    * cuerpo de la petición (siempre y cuando usemos HTTPS con protocolos 
    * seguros).
    */
+  
   app.post('/auth', (req, resp, next) => {
     const { email, password } = req.body;
+    console.log(req.body);
 
     if (!email || !password) {
       return next(400);
