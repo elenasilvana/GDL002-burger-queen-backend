@@ -62,7 +62,7 @@ router.put('/:productId', (req, res)=>{
     //modificar el estatus
     let productId = req.params.productId;
     let update = req.body;
-    Product.findByIdAndUpdate(productId, update, {new: true}, (err, productUpdated)=>{
+    Product.findByIdAndUpdate(productId, update, (err, productUpdated)=>{
         if(err) res.send({message: `Error al actualizar el producto ${err}`});
         res.json({product: productUpdated})
     }); 

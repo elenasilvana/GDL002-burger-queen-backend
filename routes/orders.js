@@ -52,13 +52,49 @@ router.get('/', (req, res) => {
 
   */
 
- router.put('/:id', (req, res)=>{
+ router.put('/:orderId', (req, res)=>{
    //modifica un pedido de pending a: preparing, delivergin, delivered.
+   let orderId = req.params.orderId;
+   console.log(orderId);
+   let update = req.body;
+   console.log(update);
+   Order.findByIdAndUpdate(orderId, update, {new: true}, (err, orderUpdated)=>{
+     if(err) res.send({message: `error al actualizar el producto ${err}`});
+     res.json({order: orderUpdated});
+   });
+   
 
  });
 
- router.delete('/:id', (req, res)=>{
+ router.delete('/:orderId', (req, res)=>{
    //borra un pedido
+   let orderId = req.params.orderId;
+
+    Order.findById(orderId, (err, order)=>{
+    if(err) res.send({message: `error al borrar el producto ${err}`});
+
+      order.remove(err => {
+        if(err) res.send({message: `error al borrar la orden ${err}`});
+        res.send({message: `la orden ha sido eliminada`});
+      });
+
+    })
+   
+
  });
+
+ /*
+  //borrar el producto
+    let productId = req.params.productId;
+    
+    Product.findById(productId, (err, product)=> {
+        if(err) res.send({message: `Error al borrar el producto ${err}`});
+
+        product.remove(err => {
+            if(err) res.send({message: `Error al borrar el producto: ${err}`});
+            res.send({message: `El producto ha sido eliminado`});
+        });
+    });
+ */
 
 module.exports = router;
