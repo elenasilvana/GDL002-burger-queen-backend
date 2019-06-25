@@ -11,12 +11,23 @@ router.use(function(req, res, next){
 
 router.get('/', (req, res) => {
   //aquí deberían aparecer todas las ordenes
-      res.send('aquí estás');
+    Order.find({}, (err, orders)=>{
+      if(err) return res.send({message: `error al mostrar productos ${err}`})
+      res.send({orders});
+    })
+
   });
 
- router.get('/:id', (req, res)=>{
+ router.get('/:orderId', (req, res)=>{
    //recibe id y le hace get al elemento que corresponde al id
    //devuelve el elemento que se mandó a llamar
+   let orderId= req.params.orderId;
+
+   Order.findById(orderId, (err, order)=>{
+     if(err) return res.send({message: `error al realizar la petición ${err}`});
+     if (!order) return res.send({message: `la orden que buscas no existe`});
+     res.send({order});
+   })
  });
 
  router.post('/', (req, res)=>{
