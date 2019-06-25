@@ -7,12 +7,22 @@ const routes = require('./routes');
 const pkg = require('./package.json');
 
 
+//para prender el server
+//sudo service mongod start 
+
+//parar server
+//sudo service mongod stop
+
 const { port, mongoUrl, secret } = config;
 const app = express();
 
 
 // Conectar aplicación a MongoDB
 mongoose.connect(mongoUrl, { useNewUrlParser: true });
+
+//probar rutas
+
+
 
 
 app.set('config', config);
@@ -34,3 +44,13 @@ routes(app, (err) => {
 
   app.listen(port, () => console.log(`App listening on port ${port}`));
 });
+
+//order
+const orders = require('./routes/orders');
+
+app.use('/order', orders);
+
+//products
+const product = require('./routes/products');
+
+app.use('/product', product);
