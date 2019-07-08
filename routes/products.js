@@ -2,6 +2,21 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 
+/*
+const {
+    requireAuth,
+    requireAdmin,
+    isAuthenticated,
+    isAdmin,
+  } = require('../middleware/auth');
+  const {
+    createPrivatePropsFilter,
+    getPaginationParamsFromRequest,
+    buildLinkHeader,
+  } = require('../lib/util');
+*/
+  
+
 //models
 const Product = require('../models/Products');
 
@@ -16,7 +31,7 @@ router.get('/', (req, res) => {
         if(err) return res.send({message: `Error al realizar la petición ${err}`});
         if (!products) return res.send({message: `no existen los productos`});
 
-        res.send({products});
+        res.json({products});
     });
  });
 
@@ -28,7 +43,7 @@ router.get('/:productId', (req, res)=> {
         if(err) return res.send({message: `error al realizar la petición`}); 
         if(!product) return res.send({message: `el producto no existe`});
 
-        res.send({product:product});
+        res.json({product:product});
     });
 });
 
@@ -46,7 +61,7 @@ router.post('/',(req, res)=>{
     product.save((err, productstored)=>{
         if(err) res.send('error al registrar producto');
 
-        res.send({product});
+        res.json({product});
     });
 
     /* 
@@ -77,8 +92,8 @@ router.delete('/:productId', (req, res)=>{
         if(err) res.send({message: `Error al borrar el producto ${err}`});
 
         product.remove(err => {
-            if(err) res.send({message: `Error al borrar el producto: ${err}`});
-            res.send({message: `El producto ha sido eliminado`});
+            if(err) res.json({message: `Error al borrar el producto: ${err}`});
+            res.json({message: `El producto ha sido eliminado`});
         });
     });
 

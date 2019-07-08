@@ -12,8 +12,8 @@ router.use(function(req, res, next){
 router.get('/', (req, res) => {
   //aquí deberían aparecer todas las ordenes
     Order.find({}, (err, orders)=>{
-      if(err) return res.send({message: `error al mostrar productos ${err}`})
-      res.send({orders});
+      if(err) return res.send({message: `error al mostrar productos ${err}`});
+      res.json({orders});
     })
 
   });
@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
    Order.findById(orderId, (err, order)=>{
      if(err) return res.send({message: `error al realizar la petición ${err}`});
      if (!order) return res.send({message: `la orden que buscas no existe`});
-     res.send({order});
+     res.json({order});
    })
  });
 
@@ -41,7 +41,7 @@ router.get('/', (req, res) => {
 
    order.save((err, productstored)=>{
      if(err) res.send('error al registrar producto');
-     res.send({order});
+     res.json({order});
    });
  });
 
