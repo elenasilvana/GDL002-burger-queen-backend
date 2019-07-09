@@ -1,7 +1,7 @@
 const auth = require('./auth');
 const users = require('./users');
 //order
-//const order = require('./orders');
+const order = require('./orders');
 //products
 const products = require('./products');
 
@@ -35,5 +35,6 @@ module.exports = (app, next) => register(app, [
   auth,
   users,
   products,
+  order,
   root
 ], next);
