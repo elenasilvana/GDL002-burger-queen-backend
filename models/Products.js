@@ -3,10 +3,22 @@ const Schema = mongoose.Schema;
 
 //Schema
 const MenuSchema = Schema({
-    category: {type: String, enum: ['Desayuno', 'Normal']},
-    img: String,//url de imagen
-    price: {type:Number, default: 0},
-    product: String, //nombre de la comida
+    category: {
+        type: String, 
+        required: true /*, enum: ['Desayuno', 'Normal']*/
+    },
+    img: {
+        type: String, 
+        required: true 
+    },//url de imagen
+    price: {
+        type: Number, 
+        required: true 
+    },
+    product: { 
+        type: String, 
+        required: true 
+    } //nombre de la comida
     //options: Array, extras: Array
 });
 
