@@ -20,11 +20,6 @@ const app = express();
 // Conectar aplicación a MongoDB
 mongoose.connect(mongoUrl, { useNewUrlParser: true });
 
-//probar rutas
-
-
-
-
 app.set('config', config);
 app.set('pkg', pkg);
 
@@ -45,12 +40,3 @@ routes(app, (err) => {
   app.listen(port, () => console.log(`App listening on port ${port}`));
 });
 
-//order
-//const orders = require('./routes/orders');
-
-//app.use('/order', orders);
-
-//products
-//const product = require('./routes/products');
-
-//app.use('/product', product);
