@@ -46,11 +46,11 @@ routes(app, (err) => {
 });
 
 //order
-const orders = require('./routes/orders');
+//const orders = require('./routes/orders');
 
-app.use('/order', orders);
+//app.use('/order', orders);
 
 //products
-const product = require('./routes/products');
+//const product = require('./routes/products');
 
-app.use('/product', product);
+//app.use('/product', product);

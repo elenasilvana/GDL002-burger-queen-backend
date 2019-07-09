@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const router = express.Router();
+//const router = express.Router();
 
-/*
+
 const {
     requireAuth,
     requireAdmin,
@@ -14,19 +14,22 @@ const {
     getPaginationParamsFromRequest,
     buildLinkHeader,
   } = require('../lib/util');
-*/
   
 
 //models
 const Product = require('../models/Products');
 
+module.exports = (app, next, secondNext) => {
+
+/*
 router.use(function(req, res, next){
     console.log('/product entrando')
     next()
-});
+}); 
+*/
 
 //all products
-router.get('/', (req, res) => {
+app.get('/product', (req, res) => {
     Product.find({}, (err, products)=>{
         if(err) return res.send({message: `Error al realizar la petición ${err}`});
         if (!products) return res.send({message: `no existen los productos`});
@@ -35,9 +38,13 @@ router.get('/', (req, res) => {
     });
  });
 
+ 
+
 //an especific product
-router.get('/:productId', (req, res)=> {
+app.get('product/:productId', requireAuth, (req, res, next)=> {
+    console.log('estoy entrando');
     let productId = req.params.productId;
+    console.log(productId);
     
     Product.findById(productId, (err, product)=> {
         if(err) return res.send({message: `error al realizar la petición`}); 
@@ -45,8 +52,16 @@ router.get('/:productId', (req, res)=> {
 
         res.json({product:product});
     });
-});
+}); 
 
+
+return typeof next === "function" ? next () : secondNext ();
+
+};
+
+
+
+/*
 //create and save new product
 router.post('/',(req, res)=>{
     //creas un nuevo producto 
@@ -64,11 +79,6 @@ router.post('/',(req, res)=>{
         res.json({product});
     });
 
-    /* 
-    category: {type: String, enum: ['Desayuno', 'Normal']},
-    img: String,//url de imagen
-    price: {type:Number, default: 0},
-    product: String, //nombre de */
 });
 
 //modify product
@@ -102,4 +112,4 @@ router.delete('/:productId', (req, res)=>{
 
 
 
-module.exports = router;
+module.exports = router;*/
