@@ -29,7 +29,7 @@ router.use(function(req, res, next){
 */
 
 //all products
-app.get('/product', (req, res) => {
+app.get('/product', requireAuth, (req, res) => {
     Product.find({}, (err, products)=>{
         if(err) return res.send({message: `Error al realizar la petición ${err}`});
         if (!products) return res.send({message: `no existen los productos`});
@@ -41,7 +41,7 @@ app.get('/product', (req, res) => {
  
 
 //an especific product
-app.get('product/:productId', requireAuth, (req, res, next)=> {
+app.get('/product/:productId', requireAuth, (req, res, next)=> {
     console.log('estoy entrando');
     let productId = req.params.productId;
     console.log(productId);
@@ -54,16 +54,8 @@ app.get('product/:productId', requireAuth, (req, res, next)=> {
     });
 }); 
 
-
-return typeof next === "function" ? next () : secondNext ();
-
-};
-
-
-
-/*
 //create and save new product
-router.post('/',(req, res)=>{
+app.post('/product/', requireAuth, (req, res)=>{
     //creas un nuevo producto 
     //price y name son necesarios
     let product = new Product()
@@ -82,19 +74,20 @@ router.post('/',(req, res)=>{
 });
 
 //modify product
-router.put('/:productId', (req, res)=>{
+app.put('/product/:productId', requireAuth, (req, res)=>{
     //modifica el elemento
     //modificar el estatus
     let productId = req.params.productId;
     let update = req.body;
-    Product.findByIdAndUpdate(productId, update, (err, productUpdated)=>{
+    console.log(update);
+    Product.findByIdAndUpdate(productId, update, {new: true}, (err, productUpdated)=>{
         if(err) res.send({message: `Error al actualizar el producto ${err}`});
         res.json({product: productUpdated})
     }); 
 });
 
 //delete product
-router.delete('/:productId', (req, res)=>{
+app.delete('/product/:productId', requireAuth, (req, res)=>{
     //borrar el producto
     let productId = req.params.productId;
     
@@ -108,6 +101,16 @@ router.delete('/:productId', (req, res)=>{
     });
 
 });
+
+
+
+return typeof next === "function" ? next () : secondNext ();
+
+};
+
+
+
+/*
 
 
 
