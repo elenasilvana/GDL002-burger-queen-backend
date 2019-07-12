@@ -6,7 +6,7 @@ const errorHandler = require('./middleware/error');
 const routes = require('./routes');
 const pkg = require('./package.json');
 
-
+const cors = require('cors');
 //para prender el server
 //sudo service mongod start 
 
@@ -26,6 +26,7 @@ app.set('pkg', pkg);
 
 app.use(express.json());
 app.use(authMiddleware(secret));
+app.use(cors());
 
 
 // Registrar rutas

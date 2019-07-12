@@ -1,5 +1,6 @@
 
 const Order = require('../models/Orders');
+const cors = require('cors');
 
 module.exports = (app, next, secondNext)=>{
 
@@ -33,7 +34,12 @@ module.exports = (app, next, secondNext)=>{
 
     order.clientname=req.body.clientname
     order.status=req.body.status
-    order.order=req.body.order
+    order.order=req.body.items
+
+    /*TODO 
+      start = new Date()
+      end = new Date()
+      start.getTime() - end.getTime() */
 
     order.save((err, productstored)=>{
       if(err) res.send('error al registrar producto');
