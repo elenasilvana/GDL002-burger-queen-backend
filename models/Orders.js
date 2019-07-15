@@ -11,7 +11,7 @@ const OrderSchema = Schema({
         enum: ['pending', 'preparing', 'delivering', 'delivered']
     },
     //order debería llamarse items
-    items: []
+    items: {type: Array, 'default': []}
     //propiedad Date, que guarde la hora y fecha en que ha sido creada la orden
 });
 

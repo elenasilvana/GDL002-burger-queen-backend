@@ -34,7 +34,7 @@ module.exports = (app, next, secondNext)=>{
 
     order.clientname=req.body.clientname
     order.status=req.body.status
-    order.order=req.body.items
+    order.items=req.body.items
 
     /*TODO 
       start = new Date()
