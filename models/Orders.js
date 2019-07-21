@@ -8,10 +8,10 @@ const OrderSchema = Schema({
     clientname: String,
     status: {
         type: String, 
-        enum: ['pending', 'preparing', 'delivering', 'delivered']
+        enum: ['pending', 'preparing', 'ready', 'delivering', 'delivered']
     },
     //order debería llamarse items
-    order: Array
+    items: {type: Array, 'default': []}
     //propiedad Date, que guarde la hora y fecha en que ha sido creada la orden
 });
 
