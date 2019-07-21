@@ -8,7 +8,7 @@ const OrderSchema = Schema({
     clientname: String,
     status: {
         type: String, 
-        enum: ['pending', 'preparing', 'delivering', 'delivered']
+        enum: ['pending', 'preparing', 'ready', 'delivering', 'delivered']
     },
     //order debería llamarse items
     items: {type: Array, 'default': []}

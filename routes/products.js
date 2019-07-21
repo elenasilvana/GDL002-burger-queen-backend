@@ -29,7 +29,7 @@ module.exports = (app, next, secondNext) => {
     */
 
     //all products
-    app.get('/product', requireAuth, (req, res) => {
+    app.get('/product', (req, res) => {
         Product.find({}, (err, products)=>{
             if(err) return res.send({message: `Error al realizar la petición ${err}`});
             if (!products) return res.send({message: `no existen los productos`});
@@ -41,7 +41,7 @@ module.exports = (app, next, secondNext) => {
     
 
     //an especific product
-    app.get('/product/:productId', requireAuth, (req, res, next)=> {
+    app.get('/product/:productId', (req, res, next)=> {
         console.log('estoy entrando');
         let productId = req.params.productId;
         console.log(productId);
@@ -55,7 +55,7 @@ module.exports = (app, next, secondNext) => {
     }); 
 
     //create and save new product
-    app.post('/product/', requireAuth, (req, res)=>{
+    app.post('/product/', (req, res)=>{
         //const { category, img, price, product  } = req.body;
         //creas un nuevo producto 
         //price y name son necesarios

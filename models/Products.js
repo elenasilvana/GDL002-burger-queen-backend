@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const MenuSchema = Schema({
     category: {
         type: String, 
-        required: true /*, enum: ['Desayuno', 'Normal']*/
+        required: true /*, enum: ['desayuno', 'normal']*/
     },
     img: {
         type: String, 
