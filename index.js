@@ -38,6 +38,7 @@ routes(app, (err) => {
   // Registro de "middleware" que maneja posibles errores
   app.use(errorHandler);
 
-  app.listen(port, () => console.log(`App listening on port ${port}`));
+  const ports = process.env.PORT || 6000;
+  app.listen(ports, () => console.log(`App listening on port ${ports}`));
 });
 
