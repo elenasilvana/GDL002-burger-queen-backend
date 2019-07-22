@@ -13,7 +13,7 @@ const cors = require('cors');
 //parar server
 //sudo service mongod stop
 
-const { port, mongoUrl, secret } = config;
+const { mongoUrl, secret } = config;
 const app = express();
 
 
@@ -38,7 +38,7 @@ routes(app, (err) => {
   // Registro de "middleware" que maneja posibles errores
   app.use(errorHandler);
 
-  const ports = process.env.PORT || 6000;
-  app.listen(ports, () => console.log(`App listening on port ${ports}`));
+  const port = process.env.PORT || 6000;
+  app.listen(port, () => console.log(`App listening on port ${port}`));
 });
 
